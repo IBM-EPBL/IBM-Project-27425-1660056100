@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% set active_page = "Dashboard" %} {% block head %}
+<title>Dashboard</title>
+{% endblock %} {% block body %}
+
+<div class="container-fluid py-4">
+  <div class="row mt-4">
+    {% for row in students.articles %}
+    <div class="m-2 col-md-4">
+      <div class="card z-index-2" style="width: 18rem">
+        <img src={{row["media"]}} class="img-fluid border-radius-lg"
+        alt="Responsive image">
+        <div class="card-body">
+          <h6 class="card-title">{{row["title"]}}</h6>
+          <p
+            class="text-sm"
+            style="
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            "
+          >
+            {{row["summary"]}}
+          </p>
+          <div class="row">
+            <div class=" ">
+              <button
+                type="button"
+                class="btn btn-block bg-gradient-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal{{loop.index0}}"
+              >
+                Read more...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      style="overflow-y: scroll"
+      id="exampleModal{{loop.index0}}"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal- modal-dialog-centered modal-"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title font-weight-normal" id="exampleModalLabel">
+              Modal title
+            </h6>
+            <button
+              type="button"
+              class="btn-close text-dark"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>{{row["summary"]}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
